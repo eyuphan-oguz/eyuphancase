@@ -1,9 +1,5 @@
 package com.eyuphancase.eyuphancase.model.entity;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,13 +29,11 @@ public class Employee {
     @Column(name = "employee_surname")
     private String surname;
 
-    @Column(name = "employee_created")
-    @CreationTimestamp
-    private LocalDateTime createdOn;
+    @Column(name = "employee_mail")
+    private String mail;
 
-    @Column(name = "employee_updated")
-    @UpdateTimestamp
-    private LocalDateTime updateOn;
+    @Column(name = "active")
+    private boolean active = true;
 
     
 }

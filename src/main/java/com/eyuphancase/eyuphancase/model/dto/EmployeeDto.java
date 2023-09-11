@@ -14,10 +14,13 @@ public class EmployeeDto {
     
     @NotNull
     private Long id;
-    
+
     @NotBlank
     private String name;
 
     @NotBlank
     private String surname;
+
+    @NotBlank
+    private String mail;
 }
