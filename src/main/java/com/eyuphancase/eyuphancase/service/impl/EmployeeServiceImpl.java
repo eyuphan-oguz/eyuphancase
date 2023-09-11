@@ -13,6 +13,7 @@ import com.eyuphancase.eyuphancase.exception.employee.EmployeeNotFoundException;
 import com.eyuphancase.eyuphancase.model.dto.EmployeeDto;
 import com.eyuphancase.eyuphancase.model.entity.Employee;
 import com.eyuphancase.eyuphancase.model.vm.Employee.AddEmployeeVm;
+import com.eyuphancase.eyuphancase.model.vm.Employee.DeleteEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.GetAllEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.GetEmployeeVm;
 import com.eyuphancase.eyuphancase.repository.EmployeeRepository;
@@ -82,6 +83,19 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public boolean existsById(Long id) {
         return employeeRepository.existsByIdAndActiveTrue(id) ? true : false;
+    }
+
+    @Override
+    public DeleteEmployeeVm deleteEmployeeVm(Long id) {
+        if(!existsById(id)){
+            throw new EmployeeNotFoundException("Veritabanıda böyle bir kayıt bulunamadı.");
+        }
+        Employee employee = employeeRepository.findById(id).get();
+        employee.setActive(false);
+        employeeRepository.save(employee);
+        EmployeeDto employeeDto = modelMapperManager.forResponse().map(employee,EmployeeDto.class);
+        DeleteEmployeeVm deleteEmployeeVm = modelMapperManager.forResponse().map(employeeDto, DeleteEmployeeVm.class);
+        return deleteEmployeeVm;
     }
 
    
