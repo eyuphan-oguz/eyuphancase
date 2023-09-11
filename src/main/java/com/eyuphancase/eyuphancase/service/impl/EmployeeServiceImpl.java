@@ -16,6 +16,7 @@ import com.eyuphancase.eyuphancase.model.vm.Employee.AddEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.DeleteEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.GetAllEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.GetEmployeeVm;
+import com.eyuphancase.eyuphancase.model.vm.Employee.UpdateEmployeeVm;
 import com.eyuphancase.eyuphancase.repository.EmployeeRepository;
 import com.eyuphancase.eyuphancase.service.EmployeeService;
 import com.eyuphancase.eyuphancase.util.mapper.ModelMapperManager;
@@ -96,6 +97,24 @@ public class EmployeeServiceImpl implements EmployeeService{
         EmployeeDto employeeDto = modelMapperManager.forResponse().map(employee,EmployeeDto.class);
         DeleteEmployeeVm deleteEmployeeVm = modelMapperManager.forResponse().map(employeeDto, DeleteEmployeeVm.class);
         return deleteEmployeeVm;
+    }
+
+    @Override
+    public UpdateEmployeeVm updateEmployeeVm(Long id, UpdateEmployeeVm updateEmployeeVm) {
+        List<Employee> employeeList = employeeRepository.findByMailIgnoreCase(updateEmployeeVm.getMail());
+        if (!employeeList.isEmpty()) {     
+            throw new EmployeeAlreadyExistsException("Bu mail adıyla eşleşen kayıt sistemde zaten mevcut ve aktif.");
+                
+        }
+
+        else if(!existsById(id)){
+            throw new EmployeeNotFoundException("Verıtabanında böyle bir kayıt bulunamadı.");
+        }
+        
+        Employee employee = employeeRepository.findById(id).get();
+        employee.setMail(updateEmployeeVm.getMail());
+        employeeRepository.save(employee);
+        return updateEmployeeVm;
     }
 
    
