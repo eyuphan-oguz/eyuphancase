@@ -23,14 +23,12 @@ import com.eyuphancase.eyuphancase.service.EmployeeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/employees")
 @Tag(name = "Çalışan İşlemleri")
-@SecurityRequirement(name = "employee")
 public class EmployeeController {
 
     private EmployeeService employeeService;

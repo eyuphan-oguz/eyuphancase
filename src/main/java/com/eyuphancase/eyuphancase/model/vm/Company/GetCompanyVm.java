@@ -11,3 +11,4 @@ public class GetCompanyVm {
     @NotBlank 
     private String name;
 }
+

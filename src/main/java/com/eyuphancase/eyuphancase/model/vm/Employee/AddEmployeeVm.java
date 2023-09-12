@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public class AddEmployeeVm {
     
     @NotNull
@@ -35,6 +33,4 @@ public class AddEmployeeVm {
 
     @NotNull
     private Long companyId;
-
-
 }

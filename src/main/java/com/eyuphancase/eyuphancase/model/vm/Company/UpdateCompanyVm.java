@@ -15,3 +15,4 @@ public class UpdateCompanyVm {
     @Size(max = 100,min = 3)
     private String name;
 }
+

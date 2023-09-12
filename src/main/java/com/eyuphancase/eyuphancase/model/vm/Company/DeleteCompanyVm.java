@@ -12,3 +12,4 @@ public class DeleteCompanyVm {
     @NotNull
     private Long id;
 }
+

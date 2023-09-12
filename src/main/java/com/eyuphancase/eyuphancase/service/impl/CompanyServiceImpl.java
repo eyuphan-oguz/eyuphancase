@@ -62,8 +62,16 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Override
     public List<GetAllCompanyVm> getAllCompanyVm() {
-         List<CompanyDto> companyDtos = companyRepository.findByActive(true).stream().map(company ->modelMapperManager.forResponse().map(company,CompanyDto.class)).collect(Collectors.toList());
-        List<GetAllCompanyVm> getAllCompanyVms = companyDtos.stream().map(companyDto -> modelMapperManager.forResponse().map(companyDto, GetAllCompanyVm.class)).collect(Collectors.toList());
+         List<CompanyDto> companyDtos = companyRepository.findByActive(true).stream().map(company ->modelMapperManager
+         .forResponse().
+         map(company,CompanyDto.class))
+         .collect(Collectors.toList());
+        List<GetAllCompanyVm> getAllCompanyVms = companyDtos
+        .stream()
+        .map(companyDto -> modelMapperManager
+        .forResponse()
+        .map(companyDto, GetAllCompanyVm.class))
+        .collect(Collectors.toList());
         return getAllCompanyVms;
     }
 

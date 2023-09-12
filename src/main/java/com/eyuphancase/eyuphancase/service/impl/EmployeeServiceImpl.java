@@ -67,8 +67,10 @@ public class EmployeeServiceImpl implements EmployeeService{
     
     @Override
     public List<GetAllEmployeeVm> getAllEmployeeVm() {
-        List<EmployeeDto> employeeDtos = employeeRepository.findByActive(true).stream().map(employee ->modelMapperManager.forResponse().map(employee,EmployeeDto.class)).collect(Collectors.toList());
-        List<GetAllEmployeeVm> getAllEmployeeVms = employeeDtos.stream().map(categoryDto -> modelMapperManager.forResponse().map(categoryDto, GetAllEmployeeVm.class)).collect(Collectors.toList());
+        List<EmployeeDto> employeeDtos = employeeRepository.findByActive(true).stream().map(employee ->modelMapperManager.forResponse().map(employee,EmployeeDto.class))
+        .collect(Collectors.toList());
+        List<GetAllEmployeeVm> getAllEmployeeVms = employeeDtos.stream().map(categoryDto -> modelMapperManager.forResponse().map(categoryDto, GetAllEmployeeVm.class))
+        .collect(Collectors.toList());
         return getAllEmployeeVms;
     }
 
