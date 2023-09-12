@@ -23,4 +23,7 @@ public class Company {
 
     @Column(name = "company_name")
     private String name;
+
+    @Column(name = "active")
+    private boolean active = true;
 }
