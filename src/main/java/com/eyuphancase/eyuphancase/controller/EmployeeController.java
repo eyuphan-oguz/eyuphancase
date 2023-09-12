@@ -24,7 +24,7 @@ import com.eyuphancase.eyuphancase.service.EmployeeService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/employee")
+@RequestMapping("/api/employees")
 public class EmployeeController {
 
     private EmployeeService employeeService;

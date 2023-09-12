@@ -24,7 +24,7 @@ import com.eyuphancase.eyuphancase.service.CompanyService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/company")
+@RequestMapping("/api/companies")
 public class CompanyController {
 
     CompanyService companyService;

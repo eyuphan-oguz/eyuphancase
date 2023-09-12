@@ -27,4 +27,7 @@ public class GetAllEmployeeVm {
     @NotBlank
     @Size(max = 100)
     private String mail;
+
+    @NotNull
+    private Long companyId;
 }

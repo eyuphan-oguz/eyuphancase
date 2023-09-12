@@ -33,5 +33,8 @@ public class AddEmployeeVm {
     @Size(max = 150,min = 3)
     private String mail;
 
+    @NotNull
+    private Long companyId;
+
 
 }

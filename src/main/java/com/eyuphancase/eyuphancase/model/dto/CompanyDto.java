@@ -16,4 +16,7 @@ public class CompanyDto {
 
     @NotBlank
     private String name;
+
+    @NotBlank
+    private Long companyId;
 }

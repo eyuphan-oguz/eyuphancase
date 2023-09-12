@@ -11,12 +11,14 @@ import com.eyuphancase.eyuphancase.exception.employee.EmployeeMethodArgumentNotV
 import com.eyuphancase.eyuphancase.exception.employee.EmployeeNotFoundException;
 import com.eyuphancase.eyuphancase.model.dto.EmployeeDto;
 import com.eyuphancase.eyuphancase.model.entity.Employee;
+import com.eyuphancase.eyuphancase.model.vm.Company.GetCompanyVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.AddEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.DeleteEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.GetAllEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.GetEmployeeVm;
 import com.eyuphancase.eyuphancase.model.vm.Employee.UpdateEmployeeVm;
 import com.eyuphancase.eyuphancase.repository.EmployeeRepository;
+import com.eyuphancase.eyuphancase.service.CompanyService;
 import com.eyuphancase.eyuphancase.service.EmployeeService;
 import com.eyuphancase.eyuphancase.util.mapper.ModelMapperManager;
 
@@ -25,11 +27,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     
     private ModelMapperManager modelMapperManager;
     private EmployeeRepository employeeRepository;
+    private CompanyService companyService;
 
     @Autowired
-    public EmployeeServiceImpl(ModelMapperManager modelMapperManager, EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(ModelMapperManager modelMapperManager, EmployeeRepository employeeRepository,CompanyService companyService) {
         this.modelMapperManager = modelMapperManager;
         this.employeeRepository = employeeRepository;
+        this.companyService = companyService;
     }
 
     @Override
@@ -76,7 +80,10 @@ public class EmployeeServiceImpl implements EmployeeService{
         Employee employee = employeeRepository.findByIdAndActiveTrue(id);
         EmployeeDto employeeDto = modelMapperManager.forResponse().map(employee,EmployeeDto.class);
         GetEmployeeVm getEmployeeVm = modelMapperManager.forResponse().map(employeeDto, GetEmployeeVm.class);
-
+        GetCompanyVm companyVm = companyService.getCompanyVm(getEmployeeVm.getCompanyId());
+        System.out.println(companyVm);
+        getEmployeeVm.setCompany(companyVm);
+        
         return getEmployeeVm;
     }
 
